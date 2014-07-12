@@ -7,53 +7,15 @@
             return helperSP::GetResult($conn, $qry, $msg);             
         }
         
-        public function isValid($conn, $userid, $appid){
-            $qry = "
-select count(*) 
-from MZ_USERS u 
-inner join MZ_APPUSER a on 
-    a.appid = '%s'
-where u.USERID = '%s'             
-and u.USERID = a.USERID;
-";
-            $qry = sprintf($qry, $appid, $userid);
-            $result = $conn->query($qry);
-            $rows = array();        
-            if($result->num_rows >0) {                
-                while($row = $result->fetch_array(MYSQLI_NUM)) {
-                   $rows[] = $row;               
-                }   
+        public function isValid($conn, $userid, $appid, $msg){            
+            $qry = "call MZ_spUSERSc ('%s', '%s');";
+            $qry = sprintf($qry, $userid, $appid);            
+            $rows = helperSP::GetResultAndNext($conn, $qry, $msg);
+            if (count($rows) > 0){
                 $count = $rows[0][0]; 
                 return ($count > 0); 
             }
             return FALSE;
         }
-        
-        public function getListUsersGrops($conn){
-            $qry = "
-select GROUPID
-,NAME
-,'group' as TYPE
-from MZ_GROUP
-where CDATE is null
-
-union all
-
-select USERID
-,USER
-,'user' as TYPE 
-from MZ_USERS
-where CDATE is null;
-";
-            $result = $conn->query($qry);
-            $rows = array();        
-            if($result->num_rows >0) {                
-                while($row = $result->fetch_array(MYSQLI_NUM)) {
-                   $rows[] = $row;               
-                }   
-            }
-            return $rows;
-        }
-       
     } 
 ?>

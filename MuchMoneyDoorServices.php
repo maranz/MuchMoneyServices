@@ -43,7 +43,7 @@
         }
         else {
             $users = new users();
-            $isValid = $users -> isValid($conn, $userid, $appid);
+            $isValid = $users -> isValid($conn, $userid, $appid, $msg);
             if ($isValid != TRUE){
                 $msg->addError("Utente non trovato o non abilitato all'accesso");    
                 echo $msg->getJSON();
@@ -53,9 +53,6 @@
             switch ($action) {
                 case "users":
                     $rows = users::getList($conn, $appid, $msg);
-                    break;  
-                case "usersgroup":
-                    $rows = $list->getListUsersGrops($conn);
                     break;
                 case "startmenu":                    
                     $list = new menu();

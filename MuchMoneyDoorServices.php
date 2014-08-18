@@ -17,10 +17,17 @@
     }
     
     $params = json_decode($param, true);
-        
+    
+    /*
+    $action = 'itemcosts';
+    $userid = '2026b34f-db8f-11e3-b734-001a92630969';
+    $appid = 'b4b6dff6-eef3-11e3-9555-001a92630969';
+    */
+    
     $action = $params['action'];
     $userid = $params['userid'];
     $appid = $params['appid'];
+    
      
     if ($action == ''){        
         $msg->addError("Parametro 'action' non passato");
@@ -109,13 +116,15 @@
                 case "itemcosts":                    
                     $name = $params['name'];
                     $vdate = $params['vdate'];
+                    $ctype = $params['ctype'];
                     $rows = itemcost::getList($conn
                                              ,$name
                                              ,$appid                                    
                                              ,$vdate
+                                             ,$ctype
                                              ,$msg
                                              );
-                break;
+                break;                
             }
 
             if (count($rows) > 0){                

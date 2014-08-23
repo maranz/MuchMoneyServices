@@ -74,7 +74,7 @@
                     $list = new menu();
                     $rows = $list->getStartMenu($conn, $appid, $msg);
                     break;
-                case "insertmoneyout":
+                case "insertmoney":
                     $useridOwner = $params['useridowner'];
                     if ($useridOwner == ''){        
                         $msg->addError("Parametro 'useridOwner' non passato");
@@ -103,15 +103,15 @@
                     if (trim($groupid) == ''){
                         $groupid = null;
                     }
-                    $rows = moneyout::insert($conn
-                                            ,$moneyid
-                                            ,$useridOwner
-                                            ,$groupid
-                                            ,$itemcostname
-                                            ,$vdate
-                                            ,$money
-                                            ,$appid
-                                            ,$msg);
+                    $rows = money::insert($conn
+                                         ,$moneyid
+                                         ,$useridOwner
+                                         ,$groupid
+                                         ,$itemcostname
+                                         ,$vdate
+                                         ,$money
+                                         ,$appid
+                                         ,$msg);
                 break;
                 case "itemcosts":                    
                     $name = $params['name'];
@@ -122,8 +122,7 @@
                                              ,$appid                                    
                                              ,$vdate
                                              ,$ctype
-                                             ,$msg
-                                             );
+                                             ,$msg);
                 break;                
             }
 

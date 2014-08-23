@@ -1,5 +1,5 @@
 <?php
-    class moneyout
+    class money
     {
         public static function insert($conn
                                      ,&$moneyid

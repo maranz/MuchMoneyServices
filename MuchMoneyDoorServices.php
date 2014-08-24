@@ -1,15 +1,16 @@
 <?php
     include "config.php";
     include "helperSP.php";
-    include "moneyout.php";
+    include "money.php";
     include "users.php";
     include "itemcost.php";
     include "menu.php";
     include "message.php";
     
-    $msg = new message();
+    $msg = new message();        
          
     $param = $_GET['param'];
+    
     if ($param == ''){
         $msg->addError("Parametro 'param' non passato");
         echo $msg->getJSON();
@@ -27,7 +28,6 @@
     $action = $params['action'];
     $userid = $params['userid'];
     $appid = $params['appid'];
-    
      
     if ($action == ''){        
         $msg->addError("Parametro 'action' non passato");
@@ -51,7 +51,7 @@
     {
         $config = new config();
         $conn = new mysqli($config->DB_host, $config->DB_user, $config->DB_password, $config->DB_name);
-             
+          
         if (mysqli_connect_errno()) {
             $msg->addError("Errore connessione al DBMS: ".mysqli_connect_error());
             echo $msg->getJSON();
@@ -74,13 +74,13 @@
                     $list = new menu();
                     $rows = $list->getStartMenu($conn, $appid, $msg);
                     break;
-                case "insertmoney":
+                case "insertmoney":                                        
                     $useridOwner = $params['useridowner'];
                     if ($useridOwner == ''){        
                         $msg->addError("Parametro 'useridOwner' non passato");
                         echo $msg->getJSON();
                         exit();
-                    }                    
+                    }                  
                     $itemcostname = $params['itemcostname'];
                     if ($itemcostname == ''){        
                         $msg->addError("Parametro 'itemcostname' non passato");

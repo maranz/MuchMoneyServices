@@ -17,7 +17,7 @@
 			else{
 				$grpid = "null";
 			};
-            $qry = "call MZ_spMONEYOUTi (
+            $qry = "call MZ_spMONEYi (
                 @MONEYID,
                 '%s',
                  %s,   

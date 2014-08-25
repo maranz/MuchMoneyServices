@@ -5,6 +5,7 @@
                                      ,&$moneyid
                                      ,$userid
                                      ,$groupid
+                                     ,$itemcostid
                                      ,$itemcostname
                                      ,$vdata
                                      ,$money
@@ -20,7 +21,8 @@
             $qry = "call MZ_spMONEYi (
                 @MONEYID,
                 '%s',
-                 %s,   
+                 %s, 
+                @ITEMCOSTID,  
                 '%s',
                 '%s',
                  %s,
@@ -29,7 +31,7 @@
             );";
             $qry = sprintf($qry,  $userid, $grpid, $itemcostname, $vdata, $money, $appid);            
             helperSP::GetResult($conn, $qry, $msg);            
-            $row = helperSP::GetResult($conn, "SELECT @MONEYID as MONEYID", $msg);
+            $row = helperSP::GetResult($conn, "SELECT @MONEYID as MONEYID, @ITEMCOSTID as ITEMCOSTID, "."'".$itemcostname."' as ITEMCOSTNAME", $msg);
             return $row;
             /*         
             if (!($res = $conn->query("SELECT @MONEYID as MONEYID"))) {                              

@@ -107,6 +107,7 @@
                                          ,$moneyid
                                          ,$useridOwner
                                          ,$groupid
+                                         ,$itemcostid
                                          ,$itemcostname
                                          ,$vdate
                                          ,$money

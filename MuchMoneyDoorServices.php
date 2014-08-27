@@ -103,12 +103,19 @@
                     if (trim($groupid) == ''){
                         $groupid = null;
                     }
+                    $ctype = $params['ctype'];
+                    if ($ctype == ''){        
+                        $msg->addError("Parametro 'ctype' non passato");
+                        echo $msg->getJSON();
+                        exit();
+                    }
                     $rows = money::insert($conn
                                          ,$moneyid
                                          ,$useridOwner
                                          ,$groupid
                                          ,$itemcostid
                                          ,$itemcostname
+                                         ,$ctype
                                          ,$vdate
                                          ,$money
                                          ,$appid

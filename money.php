@@ -7,6 +7,7 @@
                                      ,$groupid
                                      ,$itemcostid
                                      ,$itemcostname
+                                     ,$ctype
                                      ,$vdata
                                      ,$money
                                      ,$appid
@@ -25,11 +26,12 @@
                 @ITEMCOSTID,  
                 '%s',
                 '%s',
+                '%s',
                  %s,
                 '%s', 
                 @ERR
             );";
-            $qry = sprintf($qry,  $userid, $grpid, $itemcostname, $vdata, $money, $appid);            
+            $qry = sprintf($qry,  $userid, $grpid, $itemcostname, $ctype, $vdata, $money, $appid);            
             helperSP::GetResult($conn, $qry, $msg);            
             $row = helperSP::GetResult($conn, "SELECT @MONEYID as MONEYID, @ITEMCOSTID as ITEMCOSTID, "."'".$itemcostname."' as ITEMCOSTNAME", $msg);
             return $row;

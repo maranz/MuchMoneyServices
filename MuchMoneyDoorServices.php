@@ -99,9 +99,9 @@
                         echo $msg->getJSON();
                         exit();
                     }                    
-                    $groupid = $params['groupid'];
-                    if (trim($groupid) == ''){
-                        $groupid = null;
+                    $projectid = $params['projectid'];
+                    if (trim($projectid) == ''){
+                        $projectid = null;
                     }
                     $ctype = $params['ctype'];
                     if ($ctype == ''){        
@@ -112,7 +112,7 @@
                     $rows = money::insert($conn
                                          ,$moneyid
                                          ,$useridOwner
-                                         ,$groupid
+                                         ,$projectid
                                          ,$itemcostid
                                          ,$itemcostname
                                          ,$ctype

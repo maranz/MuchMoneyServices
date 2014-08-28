@@ -4,7 +4,7 @@
         public static function insert($conn
                                      ,&$moneyid
                                      ,$userid
-                                     ,$groupid
+                                     ,$projectid
                                      ,$itemcostid
                                      ,$itemcostname
                                      ,$ctype
@@ -13,8 +13,8 @@
                                      ,$appid
                                      ,$msg){                                                     
             $grpid = null;
-            if (!empty($groupid)){
-                $grpid = "'".$groupid."'";
+            if (!empty($projectid)){
+                $grpid = "'".$projectid."'";
             }
 			else{
 				$grpid = "null";

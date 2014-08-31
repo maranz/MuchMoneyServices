@@ -11,6 +11,12 @@
          
     $param = $_GET['param'];
     
+    /*
+    echo $param;
+    exit();
+    */
+    
+    
     if ($param == ''){
         $msg->addError("Parametro 'param' non passato");
         echo $msg->getJSON();
@@ -18,17 +24,23 @@
     }
     
     $params = json_decode($param, true);
-    
+        
     /*
     $action = 'itemcosts';
     $userid = '2026b34f-db8f-11e3-b734-001a92630969';
-    $appid = 'b4b6dff6-eef3-11e3-9555-001a92630969';
-    */
+    $appid = 'b4b6dff6-eef3-11e3-9555-001a92630969';    
     
+    $action = "itemcosts";
+    $appid = "b4b6dff6-eef3-11e3-9555-001a92630969";
+    $ctype = "U";
+    $projectid = "1967f417-db8f-11e3-b734-001a92630969";
+    $userid = "2026b34f-db8f-11e3-b734-001a926";
+    */    
+       
     $action = $params['action'];
     $userid = $params['userid'];
-    $appid = $params['appid'];
-     
+    $appid = $params['appid'];    
+    
     if ($action == ''){        
         $msg->addError("Parametro 'action' non passato");
         echo $msg->getJSON();
@@ -123,13 +135,34 @@
                 break;
                 case "itemcosts":                    
                     $name = $params['name'];
+                    if (trim($name) == ''){
+                        $name = null;
+                    }
                     $vdate = $params['vdate'];
+                    if (trim($vdate) == ''){
+                        $vdate = null;
+                    }
                     $ctype = $params['ctype'];
+                    if ($ctype == ''){        
+                        $msg->addError("Parametro 'ctype' non passato");
+                        echo $msg->getJSON();
+                        exit();
+                    }
+                    $projectid = $params['projectid'];
+                    if (trim($projectid) == ''){
+                        $projectid = null;
+                    }
+                    $useridOwner = $params['useridowner'];
+                    if (trim($useridOwner) == ''){
+                        $useridOwner = null;
+                    }
                     $rows = itemcost::getList($conn
                                              ,$name
                                              ,$appid                                    
                                              ,$vdate
                                              ,$ctype
+                                             ,$useridOwner
+                                             ,$projectid
                                              ,$msg);
                 break;                
             }

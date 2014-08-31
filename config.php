@@ -3,7 +3,7 @@
     {        
         public $DB_host     = 'localhost';
         public $DB_user     = 'root';
-        public $DB_password = 'password';
-        public $DB_name     = 'databasename';
+        public $DB_password = 'mar1978luc';
+        public $DB_name     = 'MuchMoneyTest';
      }      
 ?>

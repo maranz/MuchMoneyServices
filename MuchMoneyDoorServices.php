@@ -3,20 +3,20 @@
     include "helperSP.php";
     include "money.php";
     include "users.php";
+    include "years.php";
     include "itemcost.php";
     include "menu.php";
-    include "message.php";
+    include "message.php";    
     
     $msg = new message();        
-         
+             
     $param = $_GET['param'];
     
     /*
     echo $param;
     exit();
-    */
-    
-    
+    */ 
+      
     if ($param == ''){
         $msg->addError("Parametro 'param' non passato");
         echo $msg->getJSON();
@@ -24,7 +24,13 @@
     }
     
     $params = json_decode($param, true);
-        
+    
+    /*
+    $action = "years";
+    $appid = 'b4b6dff6-eef3-11e3-9555-001a92630969';
+    $userid = '2026b34f-db8f-11e3-b734-001a92630969';
+    */
+    
     /*
     $action = 'itemcosts';
     $userid = '2026b34f-db8f-11e3-b734-001a92630969';
@@ -36,7 +42,7 @@
     $projectid = "1967f417-db8f-11e3-b734-001a92630969";
     $userid = "2026b34f-db8f-11e3-b734-001a926";
     */    
-       
+        
     $action = $params['action'];
     $userid = $params['userid'];
     $appid = $params['appid'];    
@@ -82,6 +88,9 @@
                 case "users":
                     $rows = users::getList($conn, $appid, $msg);
                     break;
+                case "years":
+                    $rows = years::getList($conn, $appid, $msg);
+                    break;
                 case "startmenu":   
                     $list = new menu();
                     $rows = $list->getStartMenu($conn, $appid, $msg);
@@ -111,8 +120,8 @@
                         echo $msg->getJSON();
                         exit();
                     }                    
-                    $projectid = $params['projectid'];
-                    if (trim($projectid) == ''){
+                    $ownerid = $params['ownerid'];
+                    if (trim($ownerid) == ''){
                         $projectid = null;
                     }
                     $ctype = $params['ctype'];
@@ -124,7 +133,7 @@
                     $rows = money::insert($conn
                                          ,$moneyid
                                          ,$useridOwner
-                                         ,$projectid
+                                         ,$ownerid
                                          ,$itemcostid
                                          ,$itemcostname
                                          ,$ctype

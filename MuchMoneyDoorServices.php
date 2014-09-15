@@ -6,7 +6,8 @@
     include "years.php";
     include "itemcost.php";
     include "menu.php";
-    include "message.php";    
+    include "message.php";
+    include "projects.php";
     
     $msg = new message();        
              
@@ -90,6 +91,9 @@
                     break;
                 case "years":
                     $rows = years::getList($conn, $appid, $msg);
+                    break;
+                case "projects":
+                    $rows = projects::getList($conn, $userid, $appid, $msg);
                     break;
                 case "startmenu":   
                     $list = new menu();

@@ -48,5 +48,11 @@
             return $result;             
             */
         }
+        
+        public static function getList($conn, $year, $userid, $projectid, $appid, $msg){
+            $qry = "call MZ_spMONEYl ('%s', '%s', '%s', '%s');";
+            $qry = sprintf($qry, $year, $userid, $projectid, $appid);            
+            return helperSP::GetResult($conn, $qry, $msg);             
+        }  
     }
 ?>

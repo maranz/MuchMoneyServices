@@ -3,7 +3,7 @@
     include "helperSP.php";
     include "money.php";
     include "users.php";
-    include "years.php";
+    include "years.php";    
     include "itemcost.php";
     include "menu.php";
     include "message.php";
@@ -177,7 +177,25 @@
                                              ,$useridOwner
                                              ,$projectid
                                              ,$msg);
-                break;                
+                break;  
+                case 'vismoney':
+                    $year = $params['year'];
+                    if (trim($year) == ''){
+                        $msg->addError("Parametro 'year' non passato");
+                        echo $msg->getJSON();
+                        exit();
+                    }
+	                $projectid = $params['projectid'];
+                    if (trim($projectid) == ''){
+                        $projectid = null;
+                    }
+                    $rows = money::getList($conn
+                                             ,$year
+                                             ,$userid                                    
+                                             ,$projectid
+                                             ,$appid                                             
+                                             ,$msg);
+	            break;              
             }
 
             if (count($rows) > 0){                

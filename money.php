@@ -54,5 +54,11 @@
             $qry = sprintf($qry, $year, $userid, $projectid, $appid);            
             return helperSP::GetResult($conn, $qry, $msg);             
         }  
+        
+        public static function getListD($conn, $year, $userid, $projectid, $appid, $msg){
+            $qry = "call MZ_spMONEYDl ('%s', '%s', '%s', '%s');";
+            $qry = sprintf($qry, $year, $userid, $projectid, $appid);            
+            return helperSP::GetResult($conn, $qry, $msg);             
+        }
     }
 ?>

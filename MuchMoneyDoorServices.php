@@ -195,7 +195,29 @@
                                              ,$projectid
                                              ,$appid                                             
                                              ,$msg);
-	            break;              
+	            break;  
+                case 'movmoney':
+                    $year = $params['year'];
+                    if (trim($year) == ''){
+                        $msg->addError("Parametro 'year' non passato");
+                        echo $msg->getJSON();
+                        exit();
+                    }
+                    $projectid = $params['projectid'];
+                    if (trim($projectid) == ''){
+                        $projectid = null;
+                    }
+                    $ownerid = $params['ownerid'];
+                    if (trim($ownerid) == ''){
+                        $ownerid = null;
+                    }
+                    $rows = money::getListD($conn
+                                             ,$year
+                                             ,$ownerid                                     
+                                             ,$projectid
+                                             ,$appid                                             
+                                             ,$msg);
+                break;              
             }
 
             if (count($rows) > 0){                

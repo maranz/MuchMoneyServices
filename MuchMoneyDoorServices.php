@@ -100,9 +100,9 @@
                     $rows = $list->getStartMenu($conn, $appid, $msg);
                     break;
                 case "insertmoney":                                        
-                    $useridOwner = $params['useridowner'];
-                    if ($useridOwner == ''){        
-                        $msg->addError("Parametro 'useridOwner' non passato");
+                    $ownerid = $params['ownerid'];
+                    if ($ownerid == ''){        
+                        $msg->addError("Parametro 'ownerid' non passato");
                         echo $msg->getJSON();
                         exit();
                     }                  
@@ -124,8 +124,8 @@
                         echo $msg->getJSON();
                         exit();
                     }                    
-                    $ownerid = $params['ownerid'];
-                    if (trim($ownerid) == ''){
+                    $projectid = $params['projectid'];
+                    if (trim($projectid) == ''){
                         $projectid = null;
                     }
                     $ctype = $params['ctype'];
@@ -136,8 +136,8 @@
                     }
                     $rows = money::insert($conn
                                          ,$moneyid
-                                         ,$useridOwner
                                          ,$ownerid
+                                         ,$projectid
                                          ,$itemcostid
                                          ,$itemcostname
                                          ,$ctype

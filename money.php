@@ -13,12 +13,13 @@
                                      ,$appid
                                      ,$msg){                                                     
             $grpid = null;
-            if (!empty($projectid)){
+            if (!empty($projectid) && $projectid != "PRIVATE" ){
                 $grpid = "'".$projectid."'";
             }
 			else{
 				$grpid = "null";
-			};
+			};            
+           
             $qry = "call MZ_spMONEYi (
                 @MONEYID,
                 '%s',
@@ -32,8 +33,8 @@
                 @ERR
             );";
             $qry = sprintf($qry,  $userid, $grpid, $itemcostname, $ctype, $vdata, $money, $appid);            
-            helperSP::GetResult($conn, $qry, $msg);            
-            $row = helperSP::GetResult($conn, "SELECT @MONEYID as MONEYID, @ITEMCOSTID as ITEMCOSTID, "."'".$itemcostname."' as ITEMCOSTNAME", $msg);
+            helperSP::GetResult($conn, $qry, $msg);           
+            $row = helperSP::GetResult($conn, "SELECT @MONEYID as MONEYID, @ITEMCOSTID as ITEMCOSTID, "."'".$itemcostname."' as ITEMCOSTNAME", $msg);  
             return $row;
             /*         
             if (!($res = $conn->query("SELECT @MONEYID as MONEYID"))) {                              
